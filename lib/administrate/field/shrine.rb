@@ -35,6 +35,14 @@ module Administrate
       def cached_value
         resource.send("cached_#{attribute}_data")
       end
+
+      def multiple?
+        options.fetch(:multiple, false)
+      end
+
+      def allowed_types
+        options.fetch(:allowed_types, nil)
+      end
     end
   end
 end
