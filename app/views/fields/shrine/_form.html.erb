@@ -2,7 +2,7 @@
   <%= f.label field.attribute %>
 </div>
 <div class="field-unit__field">
-  <% if field.multiple -%>
+  <% if field.multiple? -%>
     <%= f.file_field field.attribute, class: "uplaod-file", multiple: true, accept: field.allowed_types %>
   <% else -%>
     <%# show image (or file thumbnail?) if available %>
