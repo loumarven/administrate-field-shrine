@@ -1,13 +1,30 @@
 <div class="field-unit__label">
   <%= f.label field.attribute %>
 </div>
+
 <div class="field-unit__field">
+  <!-- file field will be replaced by Uppy on DOMContentLoaded -->
   <% if field.multiple? -%>
-    <%= f.file_field field.attribute, class: "upload-file", multiple: true, accept: field.allowed_types %>
+    <%= f.file_field field.attribute,
+      class: "uppy-file-upload",
+      multiple: true,
+      accept: field.allowed_types %>
   <% else -%>
-    <%# show image (or file thumbnail?) if available %>
-    <%= image_tag field.url if field.url.present? || field.cached_value %>
-    <%= f.hidden_field field.attribute, value: field.cached_value %>
-    <%= f.file_field field.attribute, accept: field.allowed_types %>
+    <% resource_name = field.resource.class.to_s.downcase %>
+    <%= f.file_field field.attribute,
+      class: "uppy-file-upload",
+      accept: field.allowed_types,
+      data: {
+        preview_element: "preview-#{resource_name}-#{field.name}",
+        upload_result_element: "#{resource_name}-#{field.name}-upload-result",
+      } %>
+
+    <!-- store uploaded file data -->
+    <%= f.hidden_field field.attribute,
+      value: field.cached_value,
+      id: "#{resource_name}-#{field.name}-upload-result" %>
+
+    <!-- show image preview -->
+    <%= tag.div(id: "preview-#{resource_name}-#{field.name}") %>
   <% end -%>
 </div>
