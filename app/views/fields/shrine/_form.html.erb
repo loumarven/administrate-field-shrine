@@ -25,6 +25,8 @@
       id: "#{resource_name}-#{field.name}-upload-result" %>
 
     <!-- show image preview -->
-    <%= tag.div(id: "preview-#{resource_name}-#{field.name}") %>
+    <%= image_tag field.url,
+      width: 300,
+      id: "preview-#{f.object_name}-#{field.name}" %>
   <% end -%>
 </div>
