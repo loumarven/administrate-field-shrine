@@ -1,0 +1,9 @@
+<% attachments = field.data.to_a %>
+
+<% attachments.each do |attachment| %>
+  <% if attachment.image? -%>
+    <%= image_tag attachment.attachment_url(:small) if attachment.attachment_url.present? %>
+  <% else -%>
+    <%#= TODO: show application icon for PDF/PSD %>
+  <% end -%>
+<% end %>
