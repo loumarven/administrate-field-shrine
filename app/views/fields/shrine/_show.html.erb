@@ -1,5 +1,6 @@
 <% if field.multiple? -%>
-  <%= render partial: 'fields/shrine/show_multiple', locals: { field: field } %>
+  <%= render partial: 'fields/shrine/show_multiple',
+    locals: { attachments: field.data, derivative: field.derivative } %>
 <% else -%>
   <% if field.url_only? -%>
     <%= link_to field.url, field.url if field.url.present? %>
